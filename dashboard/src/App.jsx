@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router'; // Routes agrupa las rutas; Route 
 import './App.css'; // estilos de la app principal
 import Home from './pages/Home/Home'; // página de inicio
 
-// Navegación y páginas nuevas de esta User Story
-import Navbar from './components/organisms/Navbar/Navbar';
+// Estructura general de la UI (Sidebar + Main Area)
+import MainLayout from './components/templates/MainLayout/MainLayout';
 import Profile from './pages/Profile/Profile';
 import NotFound from './pages/NotFound/NotFound';
 
@@ -22,14 +22,13 @@ import UsersList from './pages/Users/UsersList/UsersList';
 import UserView from './pages/Users/UserView/UserView';
 import UserForm from './pages/Users/UserForm/UserForm';
 
-// Componente principal: muestra la barra de navegación y, debajo,
-// la página que corresponde a la URL actual (el ruteo se define acá)
+// Componente principal: define las rutas; todas se muestran dentro del
+// Main Area de MainLayout, junto al Sidebar
 function App() {
   return (
-    <>
-      <Navbar /> {/* visible en todas las páginas */}
-
-      <Routes>
+    <Routes>
+      {/* Ruta "layout": sin path, envuelve a todas las demás con MainLayout (renderizan en su <Outlet />) */}
+      <Route element={<MainLayout />}>
         {/* Inicio */}
         <Route path="/" element={<Home />} />
 
@@ -54,10 +53,11 @@ function App() {
         {/* Perfil del usuario actual */}
         <Route path="/profile" element={<Profile />} />
 
-        {/* Ruta por defecto: "*" captura cualquier URL inexistente o aún no implementada (Error 404) */}
+        {/* Ruta por defecto: "*" captura cualquier URL inexistente o aún no implementada (Error 404);
+            queda dentro del layout para que el Sidebar siga visible */}
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 

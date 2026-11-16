@@ -1,0 +1,62 @@
+/* Sidebar: 296px de ancho, fijo a la izquierda mientras se scrollea el Main Area */
+.sidebar {
+  box-sizing: border-box;   /* el padding no suma al ancho: mide exactamente 296px */
+  width: var(--sidebar-width);
+  flex-shrink: 0;           /* el Main Area no lo achica */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;           /* en celulares descuenta la barra del navegador */
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  background: var(--bg);
+}
+
+.sidebar__logo {
+  margin: 0 0 2rem 0.75rem;
+  font-size: 1.5rem;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;                  /* empuja el enlace de perfil al final */
+}
+
+.sidebar__link {
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidebar__link:hover {
+  background: var(--surface);
+}
+
+/* NavLink agrega la clase "active" al enlace de la ruta actual */
+.sidebar__link.active {
+  background: var(--accent);
+}
+
+/* Pantallas de 1024px o menos: el Sidebar se oculta fuera de la pantalla */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;        /* flota sobre el Main Area en lugar de ocupar espacio */
+    top: 0;
+    left: 0;
+    z-index: 20;            /* por encima del fondo oscuro (backdrop) y del contenido */
+    transform: translateX(-100%); /* desplazado a la izquierda, fuera de la vista */
+    visibility: hidden;     /* oculto también para teclado y lectores de pantalla */
+    transition: transform 0.25s ease, visibility 0.25s;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Abierto: vuelve a su lugar y se vuelve visible */
+  .sidebar--open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+}

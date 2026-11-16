@@ -1,5 +1,16 @@
 /* Estilos globales mínimos */
+/* Variables reutilizables por todos los componentes */
+:root {
+  --sidebar-width: 296px; /* ancho del Sidebar según el diseño */
+  --bg: #212121;          /* fondo general */
+  --surface: #2a2a2a;     /* fondo de tarjetas y elementos resaltados */
+  --accent: #5a5a5a;      /* elemento activo del menú */
+  --text: #ffffff;        /* color de texto */
+}
+
 body {
   margin: 0;
   font-family: sans-serif;
+  background: var(--bg); /* fondo oscuro como en las imágenes de referencia */
+  color: var(--text);
 }
