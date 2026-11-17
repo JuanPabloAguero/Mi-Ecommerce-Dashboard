@@ -4,8 +4,7 @@ import { matchPath } from 'react-router'; // compara una URL con un patrón de r
 // El orden importa: se usa la primera que coincide, por eso "/products/new" va antes que "/products/:id"
 const routeTitles = [
   { path: '/', title: 'Inicio' },
-  { path: '/home', title: 'Inicio' },
-
+  { path: '/home', title: (user) => `¡Hola ${user.name}!` }, // saludo personalizado: el título es una función que recibe el usuario actual
   { path: '/products', title: 'Productos' },
   { path: '/products/new', title: 'Agregar producto' },
   { path: '/products/:id', title: 'Detalle de producto' },
@@ -25,7 +24,9 @@ const routeTitles = [
 ];
 
 // Devuelve el título para una URL; si no coincide con ninguna ruta es un 404
-export function getRouteTitle(pathname) {
+export function getRouteTitle(pathname, user) {
   const route = routeTitles.find((r) => matchPath(r.path, pathname));
-  return route ? route.title : 'Página no encontrada';
+  if (!route) return 'Página no encontrada';
+  // Algunos títulos dependen del usuario (son funciones); el resto son texto fijo
+  return typeof route.title === 'function' ? route.title(user) : route.title;
 }

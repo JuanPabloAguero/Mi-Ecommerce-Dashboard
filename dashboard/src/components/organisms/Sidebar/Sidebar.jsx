@@ -1,13 +1,12 @@
 import { NavLink } from 'react-router'; // enlace que marca con la clase "active" la ruta actual
+import { useCurrentUser } from '../../../utils/useCurrentUser'; // usuario actual (centralizado en utils)
 import './Sidebar.css'; // estilos propios del componente
-
-// Usuario actual de ejemplo: todavía no hay login en este sprint,
-// más adelante este dato vendrá del usuario autenticado
-const currentUser = { name: 'Usuario' };
 
 // Menú lateral (organismo del modelo atómico).
 // Recibe por props si está abierto (solo se usa en pantallas chicas) y cómo cerrarse
 function Sidebar({ isOpen, onClose }) {
+  const currentUser = useCurrentUser();
+
   return (
     // La clase "sidebar--open" lo muestra cuando se abre en pantallas de 1024px o menos
     <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>

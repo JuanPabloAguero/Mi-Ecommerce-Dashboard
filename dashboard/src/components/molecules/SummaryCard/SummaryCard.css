@@ -1,0 +1,33 @@
+/* Tarjeta: info a la izquierda, botones a la derecha */
+.summary-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;          /* en pantallas angostas los botones pasan debajo */
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+}
+
+.summary-card__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-card__icon {
+  font-size: 2rem;
+}
+
+.summary-card__text {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.summary-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

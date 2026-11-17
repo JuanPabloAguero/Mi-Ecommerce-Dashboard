@@ -1,0 +1,6 @@
+/* Los bloques de resumen, uno debajo del otro */
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

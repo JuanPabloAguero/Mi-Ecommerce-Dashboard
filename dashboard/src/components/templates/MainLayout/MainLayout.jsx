@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router'; // Outlet: lugar donde se re
 import Sidebar from '../../organisms/Sidebar/Sidebar';
 import Header from '../../organisms/Header/Header'; // encabezado del Main Area
 import { getRouteTitle } from '../../../utils/routeTitles'; // título del Header según la ruta
+import { useCurrentUser } from '../../../utils/useCurrentUser'; // usuario actual (para el saludo del Home)
 import './MainLayout.css'; // estilos propios del layout
 
 // Estructura general de la UI (template): Sidebar + Main Area.
@@ -13,6 +14,7 @@ function MainLayout() {
 
   const { pathname } = useLocation(); // ruta actual (ej: "/products/7")
   const contentRef = useRef(null); // acceso al div de Content para controlar su scroll
+  const user = useCurrentUser(); // usuario actual (por ahora de ejemplo, hasta que haya sesiones)
 
   // Cierra el Sidebar al presionar Escape
   useEffect(() => {
@@ -40,7 +42,7 @@ function MainLayout() {
       <main className="main-area">
         {/* Header: fijo arriba, 72px; el botón de menú ahora vive acá adentro */}
         <Header
-          title={getRouteTitle(pathname)}
+          title={getRouteTitle(pathname, user)}
           menuOpen={sidebarOpen}
           onMenuClick={() => setSidebarOpen(true)}
         />
