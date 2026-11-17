@@ -1,0 +1,34 @@
+/* Encabezado: 72px de altura y ancho total del Main Area */
+.header {
+  box-sizing: border-box;
+  height: 72px;
+  flex-shrink: 0;        /* no se achica cuando el Content es muy alto */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* El botón de menú no existe en pantallas grandes (ahí el Sidebar siempre está visible) */
+.menu-button {
+  display: none;
+}
+
+/* Pantallas de 1024px o menos: aparece el botón que abre el Sidebar */
+@media (max-width: 1024px) {
+  .menu-button {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}

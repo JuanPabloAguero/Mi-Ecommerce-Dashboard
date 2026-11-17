@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react'; // estado de apertura y efecto para la tecla Escape
-import { Outlet } from 'react-router'; // lugar donde se renderiza la página de la ruta actual
+import { useState, useEffect, useRef } from 'react'; // estado de apertura, efectos y referencia al Content
+import { Outlet, useLocation } from 'react-router'; // Outlet: lugar donde se renderiza la página de la ruta actual; useLocation: URL actual
 import Sidebar from '../../organisms/Sidebar/Sidebar';
+import Header from '../../organisms/Header/Header'; // encabezado del Main Area
+import { getRouteTitle } from '../../../utils/routeTitles'; // título del Header según la ruta
 import './MainLayout.css'; // estilos propios del layout
 
 // Estructura general de la UI (template): Sidebar + Main Area.
-// Las páginas de todas las rutas se cargan dentro del Main Area
+// Las páginas de todas las rutas se cargan dentro del Main Area (en su sección Content)
 function MainLayout() {
   // Indica si el Sidebar está abierto; solo tiene efecto visual en pantallas de 1024px o menos
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { pathname } = useLocation(); // ruta actual (ej: "/products/7")
+  const contentRef = useRef(null); // acceso al div de Content para controlar su scroll
 
   // Cierra el Sidebar al presionar Escape
   useEffect(() => {
@@ -17,6 +22,11 @@ function MainLayout() {
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown); // limpieza al desmontar
   }, []);
+
+  // Al cambiar de página, el Content vuelve arriba (si no, conservaría el scroll de la página anterior)
+  useEffect(() => {
+    contentRef.current?.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="layout">
@@ -28,17 +38,17 @@ function MainLayout() {
       )}
 
       <main className="main-area">
-        {/* Botón de menú: solo se ve en pantallas de 1024px o menos */}
-        <button
-          className="menu-button"
-          aria-label="Abrir menú"
-          aria-expanded={sidebarOpen}
-          onClick={() => setSidebarOpen(true)}
-        >
-          ☰
-        </button>
+        {/* Header: fijo arriba, 72px; el botón de menú ahora vive acá adentro */}
+        <Header
+          title={getRouteTitle(pathname)}
+          menuOpen={sidebarOpen}
+          onMenuClick={() => setSidebarOpen(true)}
+        />
 
-        <Outlet /> {/* acá aparece Home, ProductsList, etc., según la URL */}
+        {/* Content: ocupa el resto de la altura y es lo único que scrollea */}
+        <div className="content" ref={contentRef}>
+          <Outlet /> {/* acá aparece Home, ProductsList, etc., según la URL */}
+        </div>
       </main>
     </div>
   );
