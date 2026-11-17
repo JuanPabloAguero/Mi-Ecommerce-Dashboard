@@ -4,6 +4,7 @@ import { matchPath } from 'react-router'; // compara una URL con un patrón de r
 // El orden importa: se usa la primera que coincide, por eso "/products/new" va antes que "/products/:id"
 const routeTitles = [
   { path: '/', title: 'Inicio' },
+  { path: '/home', title: 'Inicio' },
 
   { path: '/products', title: 'Productos' },
   { path: '/products/new', title: 'Agregar producto' },

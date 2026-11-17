@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router'; // enlace que marca con la clase "active" la ruta actual
 import './Sidebar.css'; // estilos propios del componente
 
+// Usuario actual de ejemplo: todavía no hay login en este sprint,
+// más adelante este dato vendrá del usuario autenticado
+const currentUser = { name: 'Usuario' };
+
 // Menú lateral (organismo del modelo atómico).
 // Recibe por props si está abierto (solo se usa en pantallas chicas) y cómo cerrarse
 function Sidebar({ isOpen, onClose }) {
@@ -11,16 +15,33 @@ function Sidebar({ isOpen, onClose }) {
 
       {/* Al hacer clic en un enlace se cierra el Sidebar (útil en pantallas chicas) */}
       <nav className="sidebar__nav">
-        {/* "end" evita que "/" quede activo en todas las rutas */}
-        <NavLink to="/" end className="sidebar__link" onClick={onClose}>Inicio</NavLink>
-        <NavLink to="/products" className="sidebar__link" onClick={onClose}>Productos</NavLink>
-        <NavLink to="/categories" className="sidebar__link" onClick={onClose}>Categorías</NavLink>
-        <NavLink to="/users" className="sidebar__link" onClick={onClose}>Usuarios</NavLink>
+        {/* Inicio apunta a /home (antes "/"); ya no necesita "end" porque /home no tiene rutas hijas */}
+        <NavLink to="/home" className="sidebar__link" onClick={onClose}>
+          <span className="sidebar__icon" aria-hidden="true">🏠</span> {/* ícono decorativo */}
+          Inicio
+        </NavLink>
+        {/* NavLink queda activo también en rutas hijas (/products/7), así se sigue marcando la sección actual */}
+        <NavLink to="/products" className="sidebar__link" onClick={onClose}>
+          <span className="sidebar__icon" aria-hidden="true">📦</span>
+          Productos
+        </NavLink>
+        <NavLink to="/categories" className="sidebar__link" onClick={onClose}>
+          <span className="sidebar__icon" aria-hidden="true">🏷️</span>
+          Categorías
+        </NavLink>
+        <NavLink to="/users" className="sidebar__link" onClick={onClose}>
+          <span className="sidebar__icon" aria-hidden="true">👥</span>
+          Usuarios
+        </NavLink>
       </nav>
 
-      {/* Acceso al perfil, abajo del todo como en el diseño de referencia */}
+      {/* Enlace al perfil del usuario actual: avatar + nombre, siempre abajo del todo */}
       <NavLink to="/profile" className="sidebar__link sidebar__profile" onClick={onClose}>
-        Perfil
+        {/* Avatar provisorio con la inicial del nombre */}
+        <span className="sidebar__avatar" aria-hidden="true">
+          {currentUser.name.charAt(0).toUpperCase()}
+        </span>
+        {currentUser.name}
       </NavLink>
     </aside>
   );

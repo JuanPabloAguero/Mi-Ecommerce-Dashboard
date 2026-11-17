@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router'; // Routes agrupa las rutas; Route mapea una URL a un componente
+import { Routes, Route, Navigate } from 'react-router'; // Routes agrupa las rutas; Route mapea una URL a un componente; Navigate redirige de una ruta a otra
 import './App.css'; // estilos de la app principal
 import Home from './pages/Home/Home'; // página de inicio
 
@@ -29,8 +29,10 @@ function App() {
     <Routes>
       {/* Ruta "layout": sin path, envuelve a todas las demás con MainLayout (renderizan en su <Outlet />) */}
       <Route element={<MainLayout />}>
-        {/* Inicio */}
-        <Route path="/" element={<Home />} />
+        {/* Inicio: vive en /home; la raíz "/" redirige ahí para que siga funcionando.
+            "replace" evita que "/" quede en el historial (si no, el botón Atrás volvería a redirigir) */}
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<Home />} />
 
         {/* Productos: React Router prioriza "/products/new" sobre "/products/:id" sin importar el orden */}
         <Route path="/products" element={<ProductsList />} />

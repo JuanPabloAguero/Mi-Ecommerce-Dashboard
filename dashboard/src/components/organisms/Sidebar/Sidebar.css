@@ -26,6 +26,9 @@
 }
 
 .sidebar__link {
+  display: flex;            /* ícono y texto en una misma línea */
+  align-items: center;      /* centrados verticalmente */
+  gap: 0.75rem;             /* espacio entre ícono y texto */
   padding: 0.6rem 0.75rem;
   border-radius: 0.5rem;
   color: inherit;
@@ -41,6 +44,30 @@
   background: var(--accent);
 }
 
+/* Ícono: ancho fijo para que los textos queden alineados */
+.sidebar__icon {
+  width: 1.5rem;
+  text-align: center;
+}
+
+/* Enlace de perfil: pastilla con avatar y nombre, se mantiene abajo (el nav ocupa el espacio libre) */
+.sidebar__profile {
+  background: var(--surface);
+  border-radius: 999px;     /* forma de pastilla como en el diseño */
+}
+
+/* Avatar circular provisorio con la inicial del usuario */
+.sidebar__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  font-weight: bold;
+}
+
 /* Pantallas de 1024px o menos: el Sidebar se oculta fuera de la pantalla */
 @media (max-width: 1024px) {
   .sidebar {
@@ -49,14 +76,17 @@
     left: 0;
     z-index: 20;            /* por encima del fondo oscuro (backdrop) y del contenido */
     transform: translateX(-100%); /* desplazado a la izquierda, fuera de la vista */
+    opacity: 0;             /* transparente mientras está oculto (efecto de fundido de image7) */
     visibility: hidden;     /* oculto también para teclado y lectores de pantalla */
-    transition: transform 0.25s ease, visibility 0.25s;
+    /* se anima el desplazamiento, el fundido y la visibilidad (esta última al final al cerrar) */
+    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0.25s;
     box-shadow: 4px 0 16px rgba(0, 0, 0, 0.5);
   }
 
-  /* Abierto: vuelve a su lugar y se vuelve visible */
+  /* Abierto: vuelve a su lugar, se vuelve sólido y visible */
   .sidebar--open {
     transform: translateX(0);
+    opacity: 1;
     visibility: visible;
   }
 }
