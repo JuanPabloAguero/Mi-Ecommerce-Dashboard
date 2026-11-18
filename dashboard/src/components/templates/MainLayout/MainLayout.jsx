@@ -12,6 +12,10 @@ function MainLayout() {
   // Indica si el Sidebar está abierto; solo tiene efecto visual en pantallas de 1024px o menos
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Elemento del Header donde las páginas colocan sus controles (ver HeaderActions).
+  // Es un estado (y no un ref) para que el layout se vuelva a renderizar cuando el elemento ya existe
+  const [headerSlot, setHeaderSlot] = useState(null);
+
   const { pathname } = useLocation(); // ruta actual (ej: "/products/7")
   const contentRef = useRef(null); // acceso al div de Content para controlar su scroll
   const user = useCurrentUser(); // usuario actual (por ahora de ejemplo, hasta que haya sesiones)
@@ -45,11 +49,12 @@ function MainLayout() {
           title={getRouteTitle(pathname, user)}
           menuOpen={sidebarOpen}
           onMenuClick={() => setSidebarOpen(true)}
+          actionsRef={setHeaderSlot} // guarda el elemento de acciones del Header
         />
 
         {/* Content: ocupa el resto de la altura y es lo único que scrollea */}
         <div className="content" ref={contentRef}>
-          <Outlet /> {/* acá aparece Home, ProductsList, etc., según la URL */}
+          <Outlet context={{ headerSlot }} /> {/* acá aparece Home, ProductsList, etc.; headerSlot lo leen las páginas con HeaderActions */}
         </div>
       </main>
     </div>

@@ -1,0 +1,38 @@
+/* Cuadrado gris con esquinas redondeadas, como en el diseño */
+.loading-image {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;       /* no se achica cuando el texto es largo */
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #c4c4c4;
+}
+
+/* Aviso centrado sobre el fondo gris */
+.loading-image__notice {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: #333;
+}
+
+/* La imagen cubre el cuadrado; es transparente hasta que termina de cargar */
+.loading-image__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.loading-image__img--loaded {
+  opacity: 1;
+}

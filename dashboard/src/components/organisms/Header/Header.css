@@ -1,6 +1,7 @@
 /* Encabezado: 72px de altura y ancho total del Main Area */
 .header {
   box-sizing: border-box;
+  position: relative;    /* la búsqueda expandida (pantallas chicas) se posiciona sobre todo el Header */
   height: 72px;
   flex-shrink: 0;        /* no se achica cuando el Content es muy alto */
   display: flex;
@@ -10,8 +11,20 @@
 }
 
 .header__title {
+  flex: 1;               /* ocupa el espacio libre y empuja las acciones al margen derecho */
+  min-width: 0;          /* permite que el título se recorte en lugar de desbordar */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin: 0;
   font-size: 1.5rem;
+}
+
+/* Controles que cada página coloca en el Header (buscador, botones) */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* El botón de menú no existe en pantallas grandes (ahí el Sidebar siempre está visible) */

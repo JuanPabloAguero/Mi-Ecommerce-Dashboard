@@ -12,3 +12,31 @@
 .link-button:hover {
   filter: brightness(1.15); /* se aclara un poco al pasar el mouse */
 }
+
+/* El ícono solo se usa en pantallas chicas */
+.link-button__icon {
+  display: none;
+}
+
+/* Pantallas de 640px o menos: los botones con ícono pasan a ser un círculo con solo el ícono */
+@media (max-width: 640px) {
+  .link-button--has-icon {
+    padding: 0.5rem 0.9rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .link-button--has-icon .link-button__icon {
+    display: inline;
+  }
+
+  /* Etiqueta oculta a la vista pero accesible para lectores de pantalla */
+  .link-button--has-icon .link-button__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}

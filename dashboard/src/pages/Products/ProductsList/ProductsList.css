@@ -1,0 +1,9 @@
+/* Lista de productos: una fila debajo de otra, sin viñetas */
+.productslist__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

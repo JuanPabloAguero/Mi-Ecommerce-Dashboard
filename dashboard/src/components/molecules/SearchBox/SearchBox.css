@@ -1,0 +1,77 @@
+/* Botones de lupa y de cerrar: solo existen en pantallas chicas */
+.search-box__toggle,
+.search-box__close {
+  display: none;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Campo de búsqueda en pantallas grandes */
+.search-box__field {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 300px;
+}
+
+.search-box__input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.search-box__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1rem; /* lugar a la derecha para la lupa */
+  border: 1px solid #8a8a8a;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+
+/* Lupa decorativa dentro del campo, a la derecha */
+.search-box__icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* no bloquea los clics sobre el input */
+}
+
+/* Pantallas de 640px o menos: el Header no tiene espacio, la búsqueda se vuelve compacta */
+@media (max-width: 640px) {
+  .search-box__toggle {
+    display: inline-block;
+  }
+
+  /* Cerrada: solo se ve el botón con la lupa */
+  .search-box__field {
+    display: none;
+  }
+
+  /* Expandida: el campo cubre todo el Header (que tiene position: relative) */
+  .search-box--expanded .search-box__toggle {
+    display: none;
+  }
+
+  .search-box--expanded .search-box__field {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    box-sizing: border-box;
+    width: auto;
+    padding: 0 1rem;
+    background: var(--bg);
+  }
+
+  .search-box--expanded .search-box__close {
+    display: inline-block;
+  }
+}
