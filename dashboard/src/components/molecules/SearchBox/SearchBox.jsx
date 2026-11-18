@@ -12,6 +12,12 @@ function SearchBox({ value, onChange, placeholder = 'Buscar' }) {
     if (expanded) inputRef.current?.focus();
   }, [expanded]);
 
+  // Cierra la búsqueda expandida y borra el texto, para que no quede un filtro activo que no se ve
+  const closeSearch = () => {
+    onChange('');
+    setExpanded(false);
+  };
+
   return (
     <div className={`search-box ${expanded ? 'search-box--expanded' : ''}`}>
       {/* Botón lupa: solo visible en pantallas chicas con la búsqueda cerrada */}
@@ -31,7 +37,7 @@ function SearchBox({ value, onChange, placeholder = 'Buscar' }) {
           type="button"
           className="search-box__close"
           aria-label="Cerrar búsqueda"
-          onClick={() => setExpanded(false)}
+          onClick={closeSearch}
         >
           ✕
         </button>
@@ -45,7 +51,7 @@ function SearchBox({ value, onChange, placeholder = 'Buscar' }) {
             aria-label={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)} // avisa a la página lo que se escribió
-            onKeyDown={(e) => e.key === 'Escape' && setExpanded(false)} // Escape cierra la búsqueda expandida
+            onKeyDown={(e) => e.key === 'Escape' && closeSearch()} // Escape cierra la búsqueda expandida y borra el texto
           />
           <span className="search-box__icon" aria-hidden="true">🔍</span>
         </div>
