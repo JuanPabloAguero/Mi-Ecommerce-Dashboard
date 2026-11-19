@@ -1,0 +1,11 @@
+/* Resumen y formulario, uno debajo del otro */
+.productview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.productview__error {
+  margin: 0;
+  color: #ff8a80;
+}

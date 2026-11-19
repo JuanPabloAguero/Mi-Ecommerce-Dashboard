@@ -1,0 +1,49 @@
+.product-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 640px;
+}
+
+.product-edit-form h2 {
+  margin: 1rem 0 0;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.product-edit-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.product-edit-form__image {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Input de URL y botón "Agregar" en una línea */
+.product-edit-form__row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.product-edit-form__status {
+  margin: 0;
+}
+
+.product-edit-form__status--error {
+  color: #ff8a80;
+}
+
+.product-edit-form__status--success {
+  color: #81c784;
+}
+
+.product-edit-form__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

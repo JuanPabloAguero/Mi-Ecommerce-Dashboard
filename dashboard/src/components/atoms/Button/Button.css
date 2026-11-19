@@ -1,0 +1,29 @@
+/* Botón en forma de pastilla, igual que LinkButton */
+.button {
+  padding: 0.6rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--text);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button--primary {
+  background: var(--accent);
+}
+
+/* Variante secundaria: solo borde (ej: Cancelar) */
+.button--secondary {
+  background: transparent;
+  border-color: #8a8a8a;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(1.15);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

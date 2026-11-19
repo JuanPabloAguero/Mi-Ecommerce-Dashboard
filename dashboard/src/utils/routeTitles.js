@@ -7,7 +7,7 @@ const routeTitles = [
   { path: '/home', title: (user) => `¡Hola ${user.name}!` }, // saludo personalizado: el título es una función que recibe el usuario actual
   { path: '/products', title: 'Productos' },
   { path: '/products/new', title: 'Agregar producto' },
-  { path: '/products/:id', title: 'Detalle de producto' },
+  { path: '/products/:id', title: (user, params) => `Productos > #${params.id}` }, // código del producto tomado de la URL
   { path: '/products/:id/edit', title: 'Editar producto' },
 
   { path: '/categories', title: 'Categorías' },
@@ -25,8 +25,12 @@ const routeTitles = [
 
 // Devuelve el título para una URL; si no coincide con ninguna ruta es un 404
 export function getRouteTitle(pathname, user) {
-  const route = routeTitles.find((r) => matchPath(r.path, pathname));
-  if (!route) return 'Página no encontrada';
-  // Algunos títulos dependen del usuario (son funciones); el resto son texto fijo
-  return typeof route.title === 'function' ? route.title(user) : route.title;
+  for (const route of routeTitles) {
+    const match = matchPath(route.path, pathname); // null si no coincide; si coincide trae los parámetros (ej: { id: '7' })
+    if (match) {
+      // Algunos títulos dependen del usuario o de la URL (son funciones); el resto son texto fijo
+      return typeof route.title === 'function' ? route.title(user, match.params) : route.title;
+    }
+  }
+  return 'Página no encontrada';
 }

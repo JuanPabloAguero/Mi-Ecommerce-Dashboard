@@ -1,0 +1,33 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field__label {
+  font-size: 0.95rem;
+}
+
+.form-field__error {
+  margin: 0;
+  color: #ff8a80;
+  font-size: 0.85rem;
+}
+
+/* Estilo común de inputs, selects y textareas (se aplica con className="form-input") */
+.form-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1px solid #8a8a8a;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea.form-input {
+  min-height: 8rem;
+  border-radius: 1rem;
+  resize: vertical;
+}

@@ -3,11 +3,11 @@ import './LoadingImage.css'; // estilos propios del componente
 
 // Imagen con aviso mientras se descarga (átomo del modelo atómico).
 // Para que el aviso se reinicie si cambia la imagen, quien lo use debe pasarle una "key" distinta a cada "src"
-function LoadingImage({ src, alt = '' }) {
+function LoadingImage({ src, alt = '', size }) { {/* "size" (px) es opcional; sin ella mide 64px */}
   const [status, setStatus] = useState('loading'); // 'loading' | 'loaded' | 'error'
 
   return (
-    <div className="loading-image">
+      <div className="loading-image" style={size ? { width: size, height: size } : undefined}>
       {/* Fondo gris con el aviso, visible hasta que la imagen carga */}
       {status === 'loading' && <span className="loading-image__notice">Cargando…</span>}
       {status === 'error' && <span className="loading-image__notice">Sin imagen</span>}

@@ -1,0 +1,34 @@
+/* Imagen a la izquierda, datos a la derecha */
+.product-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-summary__info {
+  min-width: 0; /* permite que el nombre largo se ajuste en lugar de desbordar */
+}
+
+.product-summary__name {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.product-summary__data {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.product-summary__data strong {
+  font-size: 1.25rem;
+}
+
+/* Categoría como etiqueta */
+.product-summary__category {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
