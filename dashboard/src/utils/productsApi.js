@@ -19,3 +19,9 @@ export function updateProduct(id, product) {
 export function deleteProduct(id) {
   return apiRequest(`/products/${id}`, { method: 'DELETE' });
 }
+
+// Crea un producto: POST /api/products (se envían todos sus atributos). Requiere token de administrador.
+// La API responde 201 con el producto creado, que incluye su id
+export function createProduct(product) {
+  return apiRequest('/products', { method: 'POST', body: product });
+}

@@ -7,15 +7,7 @@ import ProductSummary from '../../../components/molecules/ProductSummary/Product
 import ProductEditForm from '../../../components/organisms/ProductEditForm/ProductEditForm'; // formulario de edición
 import { getProduct, updateProduct, deleteProduct } from '../../../utils/productsApi'; // peticiones de productos
 import { getCategories } from '../../../utils/categoriesApi'; // categorías para la lista desplegable
-
-// Traduce un error de la API (o de red) en un mensaje para la persona usuaria
-function describeError(error) {
-  if (error instanceof TypeError) return 'No se pudo conectar con el servidor.'; // fetch falló (servidor apagado)
-  if (error.status === 401) return 'No autorizado: falta el token o venció. Revisa VITE_API_TOKEN en dashboard/.env.';
-  if (error.status === 403) return 'Acceso denegado: se requieren permisos de administrador.';
-  if (error.details?.length) return `${error.message}: ${error.details.join('. ')}`; // ej: validaciones de la API
-  return error.message || 'Ocurrió un error inesperado.';
-}
+import { describeError } from '../../../utils/errors'; // mensajes de error de la API (compartido con ProductForm)
 
 // Página ProductView: resumen del producto y formulario para editarlo
 function ProductView() {
